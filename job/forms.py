@@ -3,13 +3,13 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from .models import JobListing, Application, CustomUser
 from .widgets import DatePickerInput, TimePickerInput, DateTimePickerInput
-from django.forms import Textarea, TextInput, Select, PasswordInput
+from django.forms import Textarea, TextInput, Select, PasswordInput, Se
 
 class JobListingForm(forms.ModelForm):
     class Meta:
         model = JobListing
         fields = '__all__'
-        exclude=['user','locations' ]
+        exclude=['user','locations', 'faculty' ]
 
         widgets = {
 
@@ -82,9 +82,9 @@ class JobListingForm(forms.ModelForm):
                    "class": "form-control",
                 }
             ),
-             'application_deadline':DatePickerInput(
+             'application_deadline':DateTimePickerInput(
                attrs={
-                   "placeholder": "Enter date",
+                   
                    "class": "form-control",
                 }
             ),
