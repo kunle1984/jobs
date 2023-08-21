@@ -3,7 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from .models import JobListing, Application, CustomUser
 from .widgets import DatePickerInput, TimePickerInput, DateTimePickerInput
-from django.forms import Textarea, TextInput, Select, PasswordInput, Se
+from django.forms import Textarea, TextInput, Select, PasswordInput, ChoiceWidget
 
 class JobListingForm(forms.ModelForm):
     class Meta:
@@ -25,14 +25,9 @@ class JobListingForm(forms.ModelForm):
                    "class": "form-control",
                 }
             ),
-            'faculty':Select(
-               attrs={
-                   "placeholder": "Enter faculty",
-                   "class": "form-control",
-                }
-            ),
+           
           
-            'category':Select(
+            'category':ChoiceWidget(
                attrs={
                    "placeholder": "Select category",
                    "class": "form-select",
