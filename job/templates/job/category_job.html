@@ -1,0 +1,42 @@
+{% extends 'job/main.html' %}
+{%load static%}
+{%block title%} All Jobs{%endblock%}
+{%block header%}{%endblock%}
+
+{%block page%} 
+<div class="m-5 mb-4 ">
+    <h2 class="text-primary m-3">Jobs in this category</h2>
+    <div class="row g-4 me-2">
+       
+        {%for job in jobs%}
+        <div class="  col-sm-12 col-md-4 ">
+            <div class="row g-4">
+                <div class="  col-md-8">
+            <a href="{% url 'job-details' job.id %}"  > <img class="flex-shrink-0 img-fluid border m-2 rounded" src="{{job.image.url}}" alt="" style="width: 200px; height: 100px;"></a>
+            <div class="text-start ps-4">
+                <h3 class="mb-3"><a href="{% url 'job-details' job.id %}">{{job.title}}</a></h3>
+                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>
+                    
+                    {{job.location}}
+               
+                </span>
+                <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{job.Job_duration.name}}</span>
+                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{job.salary}}</span>
+            </div>
+        </div>
+        <div class="  col-md-4">
+            <p> {{job.description |truncatewords:8 }}</p>
+            <a class="btn btn-primary mb-2" href="{% url 'job-details' job.id %}">Apply Now</a>
+        </div>
+       
+        </div>
+        </div>
+        
+        {% empty %}
+        <h2 class="text-danger center"> No items found in list</h2>
+        {%endfor%}
+
+    </div>
+
+</div>
+{%endblock%}

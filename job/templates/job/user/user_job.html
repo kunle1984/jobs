@@ -1,0 +1,43 @@
+{% extends 'job/main.html' %}
+{%load static%}
+
+{%block header%}{%endblock%}
+
+{%block page%} 
+
+
+<div class="row justify-items-center">
+<div class="job-item p-4 mb-4">
+
+    <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Posted Jobs</h1>
+    <div class="row g-4">
+        {%for job in jobs%}
+        <div class="col-sm-12 col-md-8 d-flex align-items-center">
+            <a href="{% url 'job-details' job.id %}"  > <img class="flex-shrink-0 img-fluid border rounded" src="{{job.image.url}}" alt="" style="width: 80px; height: 80px;"></a>
+            <div class="text-start ps-4">
+                <h5 class="mb-3"><a href="{% url 'job-details' job.id %}">{{job.title}}</a></h5>
+                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>
+                    
+                    {{job.location}}
+               
+                </span>
+                <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{job.Job_duration.name}}</span>
+                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{job.salary}}</span>
+            </div>
+       
+
+        </div>
+        <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+            <div class="d-flex mb-3">
+                <a class="btn btn-primary mx-3" href="{% url 'update-job' job.id %}">Edit</a>
+                <a class="btn btn-primary" href="{% url 'delete-job' job.id %}">Delete</a>
+            </div>
+            <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>DeadLine: {{job.application_deadline}}</small>
+        </div>
+
+        {%endfor%}
+    </div>
+</div>
+
+{%endblock%}
+</div>

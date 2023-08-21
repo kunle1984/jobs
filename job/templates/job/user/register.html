@@ -1,0 +1,24 @@
+
+{% extends 'job/main.html' %}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block title%} Register{%endblock%}
+{%block header%}{%endblock%}
+
+{%block page%}
+<div class="container">
+    <h2>Create Account</h2>
+    <div class="row ">
+        <div class="col-md-8">
+<form method="POST" >
+{%csrf_token%}
+{{form.as_p}}
+
+<button class="btn btn-primary text-white" type="submit">Register</button>
+
+</form>
+</div>
+</div>
+<p>Already have an account ? <a class="btn btn-outline-primary" href="{%url 'login'%}">Login</a>
+</div>
+{%endblock%}

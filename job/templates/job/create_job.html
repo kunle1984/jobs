@@ -1,0 +1,24 @@
+
+{% extends 'job/main.html' %}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block title%} Register{%endblock%}
+{%block header%}{%endblock%}
+
+{%block page%}
+<div class="container">
+    <h2 class="text-primary">Create Job</h2>
+    <div class="row ">
+        <div class="col-md-8">
+
+<form method="POST" class="form-class"  enctype="multipart/form-data">
+{%csrf_token%}
+{{form.as_p}}
+
+<button class="btn btn-primary text-white" type="submit">Create Job</button>
+
+</form>
+</div>
+</div>
+</div>
+{%endblock%}

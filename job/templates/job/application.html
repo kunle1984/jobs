@@ -1,0 +1,76 @@
+{% extends 'job/main.html' %}
+{%load static%}
+{%block title%} Job Details{%endblock%}
+{%block header%}{%endblock%}
+
+{%block page%} 
+<div class="m-5 mb-4">
+    <h2 class="text-primary m-3">Applicants</h2>
+    <div class="row g-4 me-2">
+        <div class=" col-sm-12  ">
+        <table class="table table-striped table-bordered ps-3 ">
+            <thead>
+              <tr>
+                
+                <th scope="col">Job Title</th>
+                <th scope="col">Applicant Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Status</th>
+                <th scope="col">Details</th>
+               
+                <th scope="col">Change status</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+        {%for applicant in applicants%}
+    
+       
+         <tr>
+           
+            <td>{{applicant.job.title}}</td>
+            <td>{{applicant.name}}</td>
+            <td><a href="mailto:{{applicant.email}}">{{applicant.email}}</a></td>
+            {%if applicant.status == '1' %}
+            <td><p class="btn btn-dark p-2">schecdule interview</p></td>
+            {% elif  applicant.status == '2' %}
+            <td><p class="btn btn-warning p-2">interviewed..</p></td>
+            {% elif  applicant.status == '3' %}
+            <td><p class="btn btn-danger p-2">Not successful</p></td>
+            {% elif  applicant.status == '4' %}
+            <td><p class="btn btn-success p-2">Successfull</p></td>
+            {%else%}
+            <td><p class="btn btn-dark p-2">in progress..</p></td>
+            {%endif%}
+            <td><a href="{% url 'applicant-details' applicant.id%}" class="btn btn-primary p-2">View Details</a></td>
+            
+            <td>
+              <form method="POST" action="update/{{applicant.id}}" >
+                {%csrf_token%}
+                <select class="form-select" name="status">
+                    <option selected>select</option>
+                    <option value="1">Schedule interview</option>
+                    <option value="2">Interview</option>
+                    <option value="3">Not successfull</option>
+                    <option value="4">Successful</option>
+                  </select>
+
+                 
+                  <button type="submit" class="btn btn-outline-primary mt-2">update</button>
+                  </form>
+                  
+            </td>
+         </tr>
+
+        
+        {%endfor%}
+    </tbody>
+       
+        
+</table>
+
+<p>No of apllicants: {{count}}</p>
+    </div>
+</div>
+</div>
+{%endblock%}

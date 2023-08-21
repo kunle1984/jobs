@@ -1,0 +1,19 @@
+
+{% extends 'job/main.html' %}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block title%} Register{%endblock%}
+{%block header%}{%endblock%}
+
+{%block page%}
+<h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Are you sure you will like to delete
+     <strong >{{job}}</strong><br /></h1>
+<form method="POST" class="form-class"  >
+{%csrf_token%}
+
+
+<button type="submit">Delete Job</button>
+
+</form>
+
+{%endblock%}

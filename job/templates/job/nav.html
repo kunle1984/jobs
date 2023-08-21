@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+    <a href="/" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+        <h1 class="m-0 text-primary">UNNJobs</h1>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            {%if request.user.is_authenticated %}
+            {%if request.user.can_post%}
+           <span class="nav-item nav-link "> Welcome! </span> 
+            <a href="{%url 'update-profile' request.user.id%}" class="nav-item nav-link ">
+                {{request.user.username }} |
+            </a>
+            
+          
+           {% endif %}
+           {% endif %}
+            
+            <!--<a href="about.html" class="nav-item nav-link">About</a>-->
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
+               
+                    {%if request.user.is_authenticated %}
+                    <div class="dropdown-menu rounded-0 m-0">
+                    <a href="{%url 'favourite-jobs'  request.user.id %}" class="dropdown-item">Favourite Jobs</a>
+                    <a href="{%url 'my-jobs'  request.user.id %}" class="dropdown-item">My Jobs</a>
+                   
+                    {%endif%}
+
+                    {%if request.user.is_authenticated %}
+                    {%if request.user.can_post%}
+                    <a href="{% url 'create-job'%}" class="dropdown-item">Post Job</a>
+                    <a href="{% url 'user-jobs' request.user.id%}" class="dropdown-item">Posted Jobs</a>
+                    <a href="{% url 'application' request.user.id%}" class="dropdown-item">Application</a>
+                    {%endif%}
+                    {%endif%}
+                   
+                    
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+               
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">User</a>
+                <div class="dropdown-menu rounded-0 m-0">
+                    {%if request.user.is_authenticated %}
+                    <a href="{% url 'update-profile' request.user.id%}" class="dropdown-item">Profile</a>
+                    
+                    <a href="/" class="dropdown-item">Change Password</a>
+                    {%endif%}
+                    {%if request.user.is_authenticated %}
+                    {%if request.user.can_post %} 
+                    {%if request.user.can_post %} 
+                    <a href="{% url 'all-users'%}" class="dropdown-item">All users</a>
+                    {%endif%}
+                    {%endif%}
+                    {%endif%}
+
+                    
+                </div>
+            </div>
+           <!-- <a href="contact.html" class="nav-item nav-link">Contact</a>-->
+
+           
+            {%if request.user.is_authenticated %}
+            <a href="{% url 'logout'%}" class="nav-item nav-link">Logout</a>
+            {%else%}
+            <a href="{% url 'login'%}" class="nav-item nav-link">Login</a>
+            <a href="{% url 'register'%}" class="nav-item nav-link">Register</a>
+            {%endif%}
+        </div>
+
+        {%if request.user.can_post%}
+        <a href="{%url 'create-job' %}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a>
+ 
+        {%else%}
+        <a href="{%url 'all-jobs' %}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">View Jobs<i class="fa fa-arrow-right ms-3"></i></a>
+        {%endif%}
+    </div>
+</nav>

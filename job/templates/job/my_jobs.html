@@ -1,0 +1,76 @@
+{% extends 'job/main.html' %}
+{%load static%}
+{%block title%} Job Details{%endblock%}
+{%block header%}{%endblock%}
+
+{%block page%} 
+<div class="m-5 mb-4">
+    <h2 class="text-primary m-3">My Jobs</h2>
+    <div class="row g-4 me-2">
+        <div class=" col-sm-12  ">
+        <table class="table table-striped table-bordered ps-3 ">
+            <thead>
+              <tr>
+                
+                <th scope="col">Job Title</th>
+                <th scope="col">Applicant Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Status</th>
+                <th scope="col">Details</th>
+                
+                <th scope="col">Date Applied</th>
+              
+                
+              </tr>
+            </thead>
+            <tbody>
+        {%for applicant in myjobs%}
+    
+       
+         <tr>
+           
+            <td>{{applicant.job.title}}</td>
+            <td>{{applicant.name}}</td>
+            <td><a href="mailto:{{applicant.email}}">{{applicant.email}}</a></td>
+            {%if applicant.status == '1' %}
+            <td><p class="btn btn-dark p-2">schecdule interview</p></td>
+            {% elif  applicant.status == '2' %}
+            <td><p class="btn btn-warning p-2">interviewed..</p></td>
+            {% elif  applicant.status == '3' %}
+            <td><p class="btn btn-danger p-2">Not successful</p></td>
+            {% elif  applicant.status == '4' %}
+            <td><p class="btn btn-success p-2">Successfull</p></td>
+            {%else%}
+            <td><p class="btn btn-dark p-2">in progress..</p></td>
+            {%endif%}
+            <td><a href="{% url 'job-details' applicant.job.id%}" class="btn btn-primary p-2">View Details</a></td>
+            
+            <td>{{applicant.application_date}}</td>
+         </tr>
+
+        
+        {%endfor%}
+    </tbody>
+       
+        
+</table>
+
+<div class='pagination justify-content-center'>
+  {% if page_obj.has_previous %}
+    <a href='{% url "all-users" %}?page={{ page_obj.previous_page_number }}'>Previous </a>
+  {% endif %}
+
+  <span class='mx-4'>
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+  </span>
+
+  {% if page_obj.has_next %}
+    <a href='{% url "all-users" %}?page={{ page_obj.next_page_number }}' > Next</a>
+  {% endif %}
+</div>
+
+<p>No of jobs applied for: {{count}}</p>
+    </div>
+</div>
+</div>
+{%endblock%}
