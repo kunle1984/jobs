@@ -9,7 +9,7 @@ class JobListingForm(forms.ModelForm):
     class Meta:
         model = JobListing
         fields = '__all__'
-        exclude=['user','locations', 'skills' ]
+        exclude=['locations', 'skills' ]
 
         widgets = {
 
@@ -33,6 +33,14 @@ class JobListingForm(forms.ModelForm):
                    "class": "form-select",
                 }
             ),
+
+            'user':Select(
+               attrs={
+                   "placeholder": "Select category",
+                   "class": "form-select",
+                }
+            ),
+
 
 
             'category':Select(
