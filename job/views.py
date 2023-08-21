@@ -150,7 +150,7 @@ class CreateJob(View):
         
         if form.is_valid():
             form.save(commit=False)
-            form.user=self.request.user.id
+            form.user=self.request.user
             form.save()
             return redirect('user-jobs', request.user.id)
 
