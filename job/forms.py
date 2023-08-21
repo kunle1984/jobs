@@ -19,7 +19,7 @@ class JobListingForm(forms.ModelForm):
                    "class": "form-control",
                 }
             ),
-            'description':TextInput(
+            'description':Textarea(
                attrs={
                    "placeholder": "Enter description",
                    "class": "form-control",
