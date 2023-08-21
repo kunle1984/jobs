@@ -9,7 +9,7 @@ class JobListingForm(forms.ModelForm):
     class Meta:
         model = JobListing
         fields = '__all__'
-        exclude=['user','locations', 'faculty' ]
+        exclude=['user','locations', 'skills' ]
 
         widgets = {
 
@@ -30,6 +30,14 @@ class JobListingForm(forms.ModelForm):
             'category':Select(
                attrs={
                    "placeholder": "Select category",
+                   "class": "form-select",
+                }
+            ),
+
+
+            'category':Select(
+               attrs={
+                   "placeholder": "Select faculty",
                    "class": "form-select",
                 }
             ),
@@ -71,13 +79,13 @@ class JobListingForm(forms.ModelForm):
                    "class": "form-control",
                 }
             ),
-            'Job_duration':TextInput(
+            'Job_duration':Select(
                attrs={
                    
                    "class": "form-control",
                 }
             ),
-             'application_deadline':DateTimePickerInput(
+             'application_deadline':DatePickerInput(
                attrs={
                    
                    "class": "form-control",
