@@ -25,7 +25,7 @@ class JobListingForm(forms.ModelForm):
                    "class": "form-control",
                 }
             ),
-            'faculty':TextInput(
+            'faculty':Select(
                attrs={
                    "placeholder": "Enter faculty",
                    "class": "form-control",
