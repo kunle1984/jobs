@@ -146,7 +146,7 @@ class CreateJob(View):
         return render(request, 'job/create_job.html', {'form': form, 'pagename':pagename})
 
     def post(self, request):
-        form = JobListingForm(request.POST)
+        form = JobListingForm(request.POST,request.FILES)
         
         if form.is_valid():
             form.save(commit=False)
